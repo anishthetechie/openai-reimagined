@@ -63,17 +63,51 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-[100svh] overflow-hidden pt-28 pb-20"
     >
-      {/* Neural canvas background */}
+      {/* Photographic background — nebula/aurora from Unsplash */}
       <motion.div
         style={{ opacity: canvasOpacity }}
-        className="absolute inset-0 pointer-events-auto"
+        className="absolute inset-0 pointer-events-none overflow-hidden"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=2400&q=80"
+          alt=""
+          aria-hidden
+          loading="eager"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            // Nudge any source hue toward the brand violet/cyan/fuchsia palette,
+            // boost saturation, deepen blacks. Works regardless of exact source colors.
+            filter: "hue-rotate(310deg) saturate(1.35) brightness(0.55) contrast(1.1)",
+            transform: "scale(1.08)",
+          }}
+          onError={(e) => {
+            // Fallback aurora photo
+            const t = e.currentTarget;
+            if (!t.dataset.fallback) {
+              t.dataset.fallback = "1";
+              t.src =
+                "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=2400&q=80";
+            }
+          }}
+        />
+      </motion.div>
+
+      {/* Neural canvas — now a subtle overlay accent on top of the photo */}
+      <motion.div
+        style={{ opacity: canvasOpacity }}
+        className="absolute inset-0 pointer-events-auto mix-blend-screen opacity-40"
       >
         <NeuralCanvas />
       </motion.div>
 
-      {/* Dark vignette */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-ink-950/40 via-transparent to-ink-950" />
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,transparent_30%,#05060a_85%)]" />
+      {/* Strong dark gradient on left for headline readability (mirrors the dental ad pattern) */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-ink-950 via-ink-950/85 via-40% to-ink-950/50" />
+      {/* Top & bottom fade so the section blends with neighbors */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-ink-950/60 via-transparent to-ink-950" />
+      {/* Subtle radial vignette */}
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_70%_40%,transparent_0%,#05060a_90%)]" />
 
       <motion.div
         style={{ y: titleY, opacity: fadeOut }}
