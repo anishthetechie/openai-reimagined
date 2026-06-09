@@ -44,20 +44,6 @@ export default function Hero() {
     return () => clearInterval(id);
   }, []);
 
-  const [timestamp, setTimestamp] = useState("");
-  useEffect(() => {
-    const update = () => {
-      const d = new Date();
-      const pad = (n: number) => String(n).padStart(2, "0");
-      setTimestamp(
-        `${d.getUTCFullYear()}.${pad(d.getUTCMonth() + 1)}.${pad(d.getUTCDate())} · ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())} UTC`
-      );
-    };
-    update();
-    const id = setInterval(update, 1000);
-    return () => clearInterval(id);
-  }, []);
-
   return (
     <section
       ref={ref}
@@ -114,22 +100,7 @@ export default function Hero() {
         className="relative z-10 mx-auto max-w-[1500px] px-4 sm:px-8 pt-16"
       >
         {/* Top meta row */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="flex items-center gap-3 text-[11px] font-mono text-ink-500 tracking-widest uppercase"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-cyan opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan" />
-            </span>
-            <span>SYS · v8.2.1</span>
-            <span className="text-ink-700">/</span>
-            <span className="text-ink-300">{timestamp || "—"}</span>
-          </motion.div>
-
+        <div className="flex flex-wrap items-center justify-end gap-4 mb-16">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
