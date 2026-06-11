@@ -33,8 +33,13 @@ export default function Chatbot() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" && open) setOpen(false);
     };
+    const onOpenChat = () => setOpen(true);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("open-chat", onOpenChat as EventListener);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("open-chat", onOpenChat as EventListener);
+    };
   }, [open]);
 
   useEffect(() => {

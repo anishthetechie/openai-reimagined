@@ -42,7 +42,7 @@ const EVENTS = [
 
 export default function Today() {
   return (
-    <section className="relative py-32">
+    <section id="today" className="relative py-32">
       <div className="mx-auto max-w-[1500px] px-4 sm:px-8">
         <div className="grid grid-cols-12 gap-8 mb-16 items-end">
           <div className="col-span-12 lg:col-span-7">

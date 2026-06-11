@@ -71,7 +71,7 @@ export default function Benchmarks() {
   });
 
   return (
-    <section className="relative py-32 border-y border-white/5 overflow-hidden">
+    <section id="benchmarks" className="relative py-32 border-y border-white/5 overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
       <div ref={ref} className="relative mx-auto max-w-[1500px] px-4 sm:px-8">
         <div className="grid grid-cols-12 gap-8 mb-12">

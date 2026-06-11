@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
+import TiltCard from "./TiltCard";
 
 const PRODUCTS = [
   {
@@ -133,29 +134,31 @@ function ProductRow({
         style={{ y: tileY, rotate: product.rotate }}
         className="col-span-12 lg:col-span-7 relative"
       >
-        <div className="relative rounded-3xl overflow-hidden aspect-[16/10] glass">
-          <div className={`absolute inset-0 bg-gradient-to-br ${product.accent}`} />
-          <div className="absolute inset-0 grid-bg opacity-30" />
-          <div className="absolute inset-0 noise" />
+        <TiltCard className="rounded-3xl">
+          <div className="relative rounded-3xl overflow-hidden aspect-[16/10] glass">
+            <div className={`absolute inset-0 bg-gradient-to-br ${product.accent}`} />
+            <div className="absolute inset-0 grid-bg opacity-30" />
+            <div className="absolute inset-0 noise" />
 
-          {/* Embedded product preview */}
-          <div className="absolute inset-0 p-6 sm:p-10 flex flex-col">
-            <div className="flex items-center justify-between">
-              <div className="font-mono text-[11px] uppercase tracking-widest text-white/70">
-                {product.name}
+            {/* Embedded product preview */}
+            <div className="absolute inset-0 p-6 sm:p-10 flex flex-col">
+              <div className="flex items-center justify-between">
+                <div className="font-mono text-[11px] uppercase tracking-widest text-white/70">
+                  {product.name}
+                </div>
+                <div className="font-mono text-[11px] text-white/70">
+                  {product.users}
+                </div>
               </div>
-              <div className="font-mono text-[11px] text-white/70">
-                {product.users}
+              <div className="flex-1 flex items-center justify-center">
+                <Preview name={product.name} />
               </div>
-            </div>
-            <div className="flex-1 flex items-center justify-center">
-              <Preview name={product.name} />
-            </div>
-            <div className="font-display text-[10rem] sm:text-[14rem] leading-[0.8] font-semibold text-white/15 absolute -bottom-12 -right-4 select-none pointer-events-none">
-              {product.n}
+              <div className="font-display text-[10rem] sm:text-[14rem] leading-[0.8] font-semibold text-white/15 absolute -bottom-12 -right-4 select-none pointer-events-none">
+                {product.n}
+              </div>
             </div>
           </div>
-        </div>
+        </TiltCard>
       </motion.div>
 
       {/* Copy */}

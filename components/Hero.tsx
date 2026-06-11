@@ -39,6 +39,7 @@ export default function Hero() {
   const fadeOut = useTransform(scrollYProgress, [0.4, 1], [1, 0]);
 
   const [verbIdx, setVerbIdx] = useState(0);
+  const [imgLoaded, setImgLoaded] = useState(false);
   useEffect(() => {
     const id = setInterval(() => setVerbIdx((v) => (v + 1) % VERBS.length), 2400);
     return () => clearInterval(id);
@@ -54,20 +55,29 @@ export default function Hero() {
         style={{ opacity: canvasOpacity }}
         className="absolute inset-0 pointer-events-none overflow-hidden"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <motion.img
           src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=2400&q=80"
           alt=""
           aria-hidden
           loading="eager"
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
+          initial={{ opacity: 0, scale: 1.08 }}
+          animate={
+            imgLoaded
+              ? { opacity: 1, scale: [1.08, 1.16, 1.08] }
+              : { opacity: 0, scale: 1.08 }
+          }
+          transition={{
+            opacity: { duration: 1.4, ease: "easeOut" },
+            scale: { duration: 50, repeat: Infinity, ease: "easeInOut" },
+          }}
           style={{
             // Nudge any source hue toward the brand violet/cyan/fuchsia palette,
             // boost saturation, deepen blacks. Works regardless of exact source colors.
             filter: "hue-rotate(310deg) saturate(1.35) brightness(0.55) contrast(1.1)",
-            transform: "scale(1.08)",
           }}
+          onLoad={() => setImgLoaded(true)}
           onError={(e) => {
             // Fallback aurora photo
             const t = e.currentTarget;

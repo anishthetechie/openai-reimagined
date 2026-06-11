@@ -14,6 +14,8 @@ import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import CursorPro from "@/components/CursorPro";
 import Chatbot from "@/components/Chatbot";
+import CommandPalette from "@/components/CommandPalette";
+import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   return (
@@ -34,6 +36,8 @@ export default function Home() {
       <CTA />
       <Footer />
       <Chatbot />
+      <CommandPalette />
+      <BackToTop />
     </main>
   );
 }
